@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using TipOfTheDay_AspNet6.Data;
+using TipOfTheDay.Data;
+using TipOfTheDay.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 

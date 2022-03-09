@@ -3,17 +3,19 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using TipOfTheDay_AspNet6.Data;
+using TipOfTheDay.Data;
 
 #nullable disable
 
-namespace TipOfTheDay_AspNet6.Data.Migrations
+namespace TipOfTheDay_AspNet6.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220309191101_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -232,26 +234,26 @@ namespace TipOfTheDay_AspNet6.Data.Migrations
 
             modelBuilder.Entity("TagTip", b =>
                 {
-                    b.Property<int>("TagsTagID")
+                    b.Property<int>("TagsTagId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TipsTipID")
+                    b.Property<int>("TipsTipId")
                         .HasColumnType("int");
 
-                    b.HasKey("TagsTagID", "TipsTipID");
+                    b.HasKey("TagsTagId", "TipsTipId");
 
-                    b.HasIndex("TipsTipID");
+                    b.HasIndex("TipsTipId");
 
                     b.ToTable("TagTip");
                 });
 
             modelBuilder.Entity("TipOfTheDay.Models.Comment", b =>
                 {
-                    b.Property<int>("CommentID")
+                    b.Property<int>("CommentId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CommentID"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CommentId"), 1L, 1);
 
                     b.Property<string>("CommentText")
                         .IsRequired()
@@ -261,77 +263,114 @@ namespace TipOfTheDay_AspNet6.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int?>("TipID")
+                    b.Property<int?>("TipId")
                         .HasColumnType("int");
 
-                    b.HasKey("CommentID");
+                    b.HasKey("CommentId");
 
                     b.HasIndex("MemberId");
 
-                    b.HasIndex("TipID");
+                    b.HasIndex("TipId");
 
                     b.ToTable("Comment");
                 });
 
             modelBuilder.Entity("TipOfTheDay.Models.Language", b =>
                 {
-                    b.Property<int>("LanguageID")
+                    b.Property<int>("LanguageId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LanguageID"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LanguageId"), 1L, 1);
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TipID")
+                    b.Property<int?>("TipId")
                         .HasColumnType("int");
 
-                    b.HasKey("LanguageID");
+                    b.HasKey("LanguageId");
 
-                    b.HasIndex("TipID");
+                    b.HasIndex("TipId");
 
                     b.ToTable("Language");
                 });
 
             modelBuilder.Entity("TipOfTheDay.Models.Tag", b =>
                 {
-                    b.Property<int>("TagID")
+                    b.Property<int>("TagId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TagID"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TagId"), 1L, 1);
 
                     b.Property<string>("Category")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("TagID");
+                    b.HasKey("TagId");
 
                     b.ToTable("Tag");
+
+                    b.HasData(
+                        new
+                        {
+                            TagId = 1,
+                            Category = "Cat-A"
+                        },
+                        new
+                        {
+                            TagId = 2,
+                            Category = "Cat-B"
+                        },
+                        new
+                        {
+                            TagId = 3,
+                            Category = "Cat-C"
+                        });
                 });
 
             modelBuilder.Entity("TipOfTheDay.Models.Tip", b =>
                 {
-                    b.Property<int>("TipID")
+                    b.Property<int>("TipId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TipID"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TipId"), 1L, 1);
 
                     b.Property<string>("MemberId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("TipText")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("TipID");
+                    b.HasKey("TipId");
 
                     b.HasIndex("MemberId");
 
                     b.ToTable("Tip");
+
+                    b.HasData(
+                        new
+                        {
+                            TipId = 1,
+                            MemberId = "1",
+                            TipText = "The first tip"
+                        },
+                        new
+                        {
+                            TipId = 2,
+                            MemberId = "1",
+                            TipText = "Another tip"
+                        },
+                        new
+                        {
+                            TipId = 3,
+                            MemberId = "1",
+                            TipText = "Yet another tip"
+                        });
                 });
 
             modelBuilder.Entity("TipOfTheDay.Models.AppUser", b =>
@@ -339,10 +378,23 @@ namespace TipOfTheDay_AspNet6.Data.Migrations
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
                     b.Property<string>("FullName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("AppUser");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "4ca67682-2aab-49fe-972f-50ecabc7428e",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "a97beeab-c0c4-4516-8530-a44be4daafdf",
+                            TwoFactorEnabled = false,
+                            UserName = "A. Member"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -400,13 +452,13 @@ namespace TipOfTheDay_AspNet6.Data.Migrations
                 {
                     b.HasOne("TipOfTheDay.Models.Tag", null)
                         .WithMany()
-                        .HasForeignKey("TagsTagID")
+                        .HasForeignKey("TagsTagId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("TipOfTheDay.Models.Tip", null)
                         .WithMany()
-                        .HasForeignKey("TipsTipID")
+                        .HasForeignKey("TipsTipId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -421,7 +473,7 @@ namespace TipOfTheDay_AspNet6.Data.Migrations
 
                     b.HasOne("TipOfTheDay.Models.Tip", null)
                         .WithMany("Comments")
-                        .HasForeignKey("TipID");
+                        .HasForeignKey("TipId");
 
                     b.Navigation("Member");
                 });
@@ -430,16 +482,14 @@ namespace TipOfTheDay_AspNet6.Data.Migrations
                 {
                     b.HasOne("TipOfTheDay.Models.Tip", null)
                         .WithMany("Languages")
-                        .HasForeignKey("TipID");
+                        .HasForeignKey("TipId");
                 });
 
             modelBuilder.Entity("TipOfTheDay.Models.Tip", b =>
                 {
                     b.HasOne("TipOfTheDay.Models.AppUser", "Member")
                         .WithMany()
-                        .HasForeignKey("MemberId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("MemberId");
 
                     b.Navigation("Member");
                 });

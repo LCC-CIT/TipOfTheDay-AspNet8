@@ -1,4 +1,4 @@
-﻿@model TipOfTheDay.Models.Tip
+﻿@model TipOfTheDay.Models.TipTagVM
 
 @{
     ViewData["Title"] = "Edit";
@@ -12,12 +12,32 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="TipId" />
+            <input type="hidden" asp-for="Tip.TipId" />
             <div class="form-group">
-                <label asp-for="TipText" class="control-label"></label>
-                <input asp-for="TipText" class="form-control" />
-                <span asp-validation-for="TipText" class="text-danger"></span>
+                <label asp-for="Tip.TipText" class="control-label"></label>
+                <input asp-for="Tip.TipText" class="form-control" />
+                <span asp-validation-for="Tip.TipText" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+
+        <!-- 2nd form for adding or removing tags from this tip --> 
+        <form asp-action="EditTags">
+            <input type="hidden" asp-for="Tip.TipId" />
+            Select a tag to add it, unselect it to remove it.<br />
+            @for (int i = 0; i < @Model.TagSelections.Count; i++)
+            {
+                var selector = Model.TagSelections[i];
+                selector.Selected = Model.Tip
+                    .Tags.Where(t => t.TagId == selector.Tag.TagId).Any();
+                <input type="checkbox" asp-for="TagSelections[i].Selected" />
+                <label asp-for="TagSelections[i].Tag.Category">@Model.TagSelections[i].Tag.Category</label>
+                <input type="hidden" asp-for="TagSelections[i].Tag.TagId" />
+                <input type="hidden" asp-for="TagSelections[i].Tag.Category" />
+                <br />
+            }
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

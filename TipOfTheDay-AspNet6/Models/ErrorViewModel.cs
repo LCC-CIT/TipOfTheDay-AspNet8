@@ -1,4 +1,4 @@
-namespace TipOfTheDay_AspNet6.Models
+namespace TipOfTheDay.Models
 {
     public class ErrorViewModel
     {

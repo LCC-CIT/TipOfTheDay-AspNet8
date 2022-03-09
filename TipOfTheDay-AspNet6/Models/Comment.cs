@@ -2,11 +2,10 @@
 {
     public class Comment
     {
-        private AppUser member = new();
-        private string commentText = "Default text";
+        private string _commentText = "Default text";
 
         public int CommentId { get; set; }
-        public AppUser Member { get => member; set => member = value; }
-        public String CommentText { get => commentText; set => commentText = value; }
+        public AppUser Member { get; set; }
+        public String CommentText { get => _commentText; set => _commentText = value; }
     }
 }

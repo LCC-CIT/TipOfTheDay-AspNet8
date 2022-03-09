@@ -2,18 +2,16 @@
 {
     public class TagChoice
     {
-        private Tag tag = new();
-
-        public bool Selected { get; set; }
-        public Tag Tag { get => tag; set => tag = value; }
+        public bool Selected { get; set; }  // false by default
+        public Tag Tag { get; set; }
     }
+
 
     public class TipTagVM
     {
-        private Tip tip = new();
-        private List<TagChoice> tagSelections = new();
+        private readonly List<TagChoice> _tagSelections = new();
 
-        public Tip Tip { get => tip; set => tip = value; }
-        public List<TagChoice> TagSelections { get => tagSelections; set => tagSelections = value; }
+        public Tip Tip { get; set; }
+        public List<TagChoice> TagSelections { get => _tagSelections; }
     }
 }

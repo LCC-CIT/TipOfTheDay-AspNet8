@@ -7,9 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TipOfTheDay.Models;
-using TipOfTheDay_AspNet6.Data;
+using TipOfTheDay.Data;
 
-namespace TipOfTheDay_AspNet6.Controllers
+namespace TipOfTheDay.Controllers
 {
     public class TagsController : Controller
     {

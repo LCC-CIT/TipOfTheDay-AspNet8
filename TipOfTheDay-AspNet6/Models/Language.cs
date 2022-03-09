@@ -2,9 +2,8 @@
 {
     public class Language
     {
-        private string name = "Defualt language";
-
+        private string _language = "Default language";
         public int LanguageId { get; set; }
-        public String Name { get => name; set => name = value; }
+        public String Name { get => _language; set => _language = value; }
     }
 }

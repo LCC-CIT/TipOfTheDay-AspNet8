@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using TipOfTheDay_AspNet6.Models;
+using TipOfTheDay.Models;
 
-namespace TipOfTheDay_AspNet6.Controllers
+namespace TipOfTheDay.Controllers
 {
     public class HomeController : Controller
     {
