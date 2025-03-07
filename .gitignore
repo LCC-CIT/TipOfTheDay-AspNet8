@@ -364,3 +364,4 @@ FodyWeavers.xsd
 /TipOfTheDay-AspNet6/Data/TipOfTheDay.db
 /TipOfTheDay-AspNet6/Data/TipOfTheDay.db-shm
 /TipOfTheDay-AspNet6/Data/TipOfTheDay.db-wal
+/.editorconfig
