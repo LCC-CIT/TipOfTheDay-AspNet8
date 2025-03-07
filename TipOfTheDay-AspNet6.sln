@@ -12,9 +12,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{F03F5454-D031-481A-ABAB-BFFDCFA5FA5E}"
 	ProjectSection(SolutionItems) = preProject
-		..\TipOfTheDay-AspNetCore3\Docs\TipOfTheDayDomainER.pdf = ..\TipOfTheDay-AspNetCore3\Docs\TipOfTheDayDomainER.pdf
-		..\TipOfTheDay-AspNetCore3\Docs\TipOfTheDayDomainModel2022.pdf = ..\TipOfTheDay-AspNetCore3\Docs\TipOfTheDayDomainModel2022.pdf
-		..\TipOfTheDay-AspNetCore3\Docs\TipOfTheDayDomainModel2022.uxf = ..\TipOfTheDay-AspNetCore3\Docs\TipOfTheDayDomainModel2022.uxf
+		Docs\TipOfTheDayDomainER.pdf = Docs\TipOfTheDayDomainER.pdf
+		Docs\TipOfTheDayDomainModel2022.pdf = Docs\TipOfTheDayDomainModel2022.pdf
+		Docs\TipOfTheDayDomainModel2022.uxf = Docs\TipOfTheDayDomainModel2022.uxf
 	EndProjectSection
 EndProject
 Global
