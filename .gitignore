@@ -365,3 +365,9 @@ FodyWeavers.xsd
 /TipOfTheDay-AspNet6/Data/TipOfTheDay.db-shm
 /TipOfTheDay-AspNet6/Data/TipOfTheDay.db-wal
 /.editorconfig
+/TipOfTheDay-AspNet6/Migrations/20250307214417_Initial.cs
+/TipOfTheDay-AspNet6/Migrations/20250307214417_Initial.Designer.cs
+/TipOfTheDay-AspNet6/Migrations/ApplicationDbContextModelSnapshot.cs
+/TipOfTheDay-AspNet6/TipOfTheDay.db
+/TipOfTheDay-AspNet6/TipOfTheDay.db-shm
+/TipOfTheDay-AspNet6/TipOfTheDay.db-wal
