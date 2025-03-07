@@ -1,16 +1,27 @@
+#define SQLITE // SQLSERVER, SQLITE or MYSQL
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TipOfTheDay.Data;
-using TipOfTheDay.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+// After changing db type: drop the db, delete and recreate migrations then drop update the db
+#if SQLSERVER
+var connectionString = builder.Configuration.GetConnectionString("SqlServerConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+#elif SQLITE
+var connectionString = builder.Configuration.GetConnectionString("SqliteConnection");
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlite(connectionString));
+#elif MYSQL
+var connectionString = builder.Configuration.GetConnectionString("MySqlConnection");
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+#endif
 
+builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
