@@ -9,6 +9,6 @@ There are a UML class diagram and an ERD diagram in the docs directory.
 
 In program.cs there are preprossing directives that allow you to choose whether to use SQLite, MS SQL Server, or MySQL.
 
-An alternate version of this project using .net 6 is here: https://github.com/LCC-CIT/CS296N-TipOfTheDay  
 And another using .net 8 is here: https://github.com/LCC-CIT/TipOfTheDay-AspNet8  
 An older version of the code is here: https://github.com/ProfBird/TipOfTheDay-AspNetCore3  
+An even older version using .net 4.5 is here: https://github.com/LCC-CIT/CS296N-TipOfTheDay  
