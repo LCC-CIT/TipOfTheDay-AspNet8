@@ -7,6 +7,7 @@ using TipOfTheDay.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+// After changing the database provider: drop the db, remove and add a new migration, update the db
 #if SQLSERVER 
 var connectionString = builder.Configuration.GetConnectionString("SqlServerConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
