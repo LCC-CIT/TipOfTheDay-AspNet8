@@ -1,6 +1,6 @@
-TipOfTheDay-AspNet6
-By Brian Bird, 2022, revised 2025
-This is example code for courses I teach at Lane Community College
+TipOfTheDay-AspNet6  
+By Brian Bird, 2022, revised 2025  
+This is example code for courses I teach at Lane Community College  
 
 This is a prototype of an ASP.NET Core MVC web site for crowd sourcing and sharing programming tips.
 The point of this prototype was to test the many-to-many Tip-to-Tag relationship in the domain model. This is tested with simple web pages that allow creating Tips and Tags and putting Tags on Tips.
