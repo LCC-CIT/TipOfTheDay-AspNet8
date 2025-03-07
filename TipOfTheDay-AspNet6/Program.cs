@@ -1,21 +1,17 @@
-#define SQLITE // SQLSERVER, SQLITE or MYSQL
+#undef SQLSERVER // use SQL Server if this is #define, use MySQL if it's #undef
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TipOfTheDay.Data;
+using TipOfTheDay.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-// After changing db type: drop the db, delete and recreate migrations then drop update the db
-#if SQLSERVER
+#if SQLSERVER 
 var connectionString = builder.Configuration.GetConnectionString("SqlServerConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
-#elif SQLITE
-var connectionString = builder.Configuration.GetConnectionString("SqliteConnection");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlite(connectionString));
-#elif MYSQL
+#else // MySQL is the default database
 var connectionString = builder.Configuration.GetConnectionString("MySqlConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
