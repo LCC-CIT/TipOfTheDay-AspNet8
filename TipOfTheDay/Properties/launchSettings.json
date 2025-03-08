@@ -8,7 +8,7 @@
     }
   },
   "profiles": {
-    "TipOfTheDay_AspNet6": {
+    "TipOfTheDay": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
