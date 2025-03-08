@@ -1,13 +1,14 @@
 #define SQLITE // use SQLSERVER, MySQL or SQLITE
+// After changing the database provider:
+// drop the db, remove old migrations and add a new migration, update the db
+
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TipOfTheDay.Data;
-using TipOfTheDay.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-// After changing the database provider: drop the db, remove and add a new migration, update the db
 #if SQLSERVER 
 var connectionString = builder.Configuration.GetConnectionString("SqlServerConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -28,6 +29,18 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+
+// Apply pending migrations and create the database if it does not exist.
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<ApplicationDbContext>();
+    // Check if the database exists and migrations are  up to date
+    if (context.Database.GetPendingMigrations().Any() || !context.Database.CanConnect())
+    {
+        context.Database.Migrate();
+    }
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
