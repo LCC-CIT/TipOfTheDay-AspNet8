@@ -1,4 +1,4 @@
-Tip Of The Day Web Site Prototype
+Tip Of The Day Web Site Prototype  
 By Brian Bird, 2025  
 This is example code for courses I teach at Lane Community College  
 
