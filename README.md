@@ -5,12 +5,12 @@ This is example code for courses I teach at Lane Community College.
 - This is a "throwaway" prototype of an ASP.NET Core MVC web site for crowd sourcing and sharing programming tips.
 - The point of this prototype was to test the many-to-many `Tip` to `Tag` relationship in the domain model. 
 - There is a UML class diagram and an ERD diagram of the model in the docs directory.
-- This many-to-many relationship is tested with simple scaffolding for the `Tip` and `Tag` models. The only thing modified in the scaffolding was the page for editing tips to add or remove tags. This was sufficient to demonstrate that the many-to-many relationship of tips to tags was working. This is what was modified:
-  - `TipsController`, GET `Edit` method
-    -   .Include was added to get `Tag` objects for the`Tip`
-    - A `foreach` loop was added to show which tags are on the tip
-  - `Edit.cshtml` for tips was modified to allow selection of tags for a tip.
+- This many-to-many relationship is tested with simple scaffolding for the `Tip` and `Tag` models. 
+- The only things modified in the scaffolding are:
+  - The edit tips feature in the `TipsController`ß was modified to allow adding or removing tags from a tip. 
+  - A filter Tips by Tags feature was added to the `TipsController`.  
 
+These additions are sufficient to demonstrate that the many-to-many relationship of tips to tags was working.
 ## Database Configuration
 ### Database Choices
 In program.cs there are preprossing directives that allow you to choose whether to use SQLite, MS SQL Server, or MySQL.
