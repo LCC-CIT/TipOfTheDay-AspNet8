@@ -11,7 +11,7 @@ This is example code for courses I teach at Lane Community College.
   - A filter Tips by Tags feature was added to the `TipsController`.  
 
 These additions are sufficient to demonstrate that the many-to-many relationship of tips to tags is working.  
-Note that the List<Tip> on the Tag model is not used by any of the code. It is only there to force Entity Framework to make a join table between the Tip and Tag tables.
+Note that `List<Tip>` on the `Tag` model is not used by any of my code. It is only there to force Entity Framework to make a join table between the Tip and Tag tables.
 
 ## Database Configuration
 ### Database Choices
