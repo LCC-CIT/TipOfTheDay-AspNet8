@@ -16,9 +16,42 @@ namespace TipOfTheDay.Controllers
         }
 
         // GET: Tips
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(List<Tip> tips = null)
         {
-            return View(await _context.Tip.ToListAsync());
+            if (tips == null || !tips.Any())
+            {
+                tips = await _context.Tip.ToListAsync();
+            }
+            return View(tips);
+        }
+
+
+        // GET: Filtered Tips by Tags
+        public async Task<IActionResult> Filter()
+        {
+            // Get a list of TipChoice objects with the tags from the database
+            var tagSelections = await GetTagChoicesAsync();
+
+            return View(tagSelections);
+        }
+
+        // POST: Filter Tips by Tags
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Filter(List<TagChoice> tagSelections)
+        {
+            // Get the IDs of the selected tags
+            var selectedTagIds = tagSelections
+                .Where(ts => ts.Selected)
+                .Select(ts => ts.Tag.TagId)
+                .ToList();
+
+            // Get tips with the selected tags
+            var tips = await _context.Tip
+                .Where(t => t.Tags.Any(tag => selectedTagIds.Contains(tag.TagId)))
+                .ToListAsync();
+
+            return View("Index", tips);
         }
 
         // GET: Tips/Details/5
@@ -69,6 +102,7 @@ namespace TipOfTheDay.Controllers
                 return NotFound();
             }
 
+            // Retrieve the tip to be edited along with it's tags
             var tip = await _context.Tip.Include(t => t.Tags)
                                         .Where(t => t.TipId == id)
                                         .FirstOrDefaultAsync<Tip>();
@@ -77,15 +111,22 @@ namespace TipOfTheDay.Controllers
                 return NotFound();
             }
 
-            // Put all the tags in vm.TagSelections so that the user can select from them.
-            var tags = await _context.Tag.ToListAsync();
+            // Put all the tags into vm.TagSelections so that a user can select from them.
             var vm = new TipTagVM { Tip = tip };
+            vm.TagSelections.AddRange(await GetTagChoicesAsync());
+            return View(vm);
+        }
+
+        // Put all the tags in the database into a list of TagChoice objects
+        private async Task<List<TagChoice>> GetTagChoicesAsync()
+        {
+            List<TagChoice> tagChoices = new();
+            var tags = await _context.Tag.ToListAsync();
             foreach (var tag in tags)
             {
-                vm.TagSelections.Add(new TagChoice { Tag = tag });
+                tagChoices.Add(new TagChoice { Tag = tag });
             }
-
-            return View(vm);
+            return tagChoices;
         }
 
         // POST: Tips/Edit/5
@@ -104,7 +145,8 @@ namespace TipOfTheDay.Controllers
             {
                 try
                 {
-                   var result = _context.Update(vm.Tip);
+                    // vm.Tip has the tags on it that were selected in the form
+                    var result = _context.Update(vm.Tip);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

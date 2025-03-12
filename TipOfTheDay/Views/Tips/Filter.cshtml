@@ -1,0 +1,37 @@
+﻿@model List<TagChoice>
+
+@{
+    ViewData["Title"] = "Filter";
+}
+
+<h1>Filter</h1>
+
+<h4>Tip</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+
+        <!-- Form for selecting tags for filter -->
+        <form asp-action="Filter">
+            Select a tags to use to filter the tips<br />
+            @for (int i = 0; i < @Model.Count; i++)
+            {
+                var selector = Model[i];
+                selector.Selected = Model[i].Selected;
+                Model.Where(t => t.Tag.TagId == selector.Tag.TagId).Any();
+                <input type="checkbox" asp-for="@Model[i].Selected" />
+                <label asp-for="@Model[i].Tag.Category">@Model[i].Tag.Category</label>
+                <input type="hidden" asp-for="@Model[i].Tag.TagId" />
+                <input type="hidden" asp-for="@Model[i].Tag.Category" />
+                <br />
+            }
+            <div class="form-group">
+                <input type="submit" value="Enter" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-controller="Home" asp-action="Index">Back Home</a>
+</div>

@@ -31,6 +31,8 @@ builder.Services.AddControllersWithViews();
 var app = builder.Build();
 
 // Apply pending migrations and create the database if it does not exist.
+// Note: When running in production, this code won't create the .db file, it will only
+// add a schema (migrations) to an existing SQLite database file.
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
