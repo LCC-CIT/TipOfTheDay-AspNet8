@@ -6,8 +6,8 @@ This is example code for courses I teach at Lane Community College.
 - The point of this prototype was to test the many-to-many `Tip` to `Tag` relationship in the domain model. 
 - There is a UML class diagram and an ERD diagram of the model in the docs directory.
 - This many-to-many relationship is tested with simple scaffolding for the `Tip` and `Tag` models. 
-- The only things modified in the scaffolding are:
-  - The edit tips feature in the `TipsController`ß was modified to allow adding or removing tags from a tip. 
+- The only things modified in the scaffolding were:
+  - The edit tips feature in the `TipsController` was modified to allow adding or removing tags from a tip. 
   - A filter Tips by Tags feature was added to the `TipsController`.  
 
 These additions are sufficient to demonstrate that the many-to-many relationship of tips to tags was working.
